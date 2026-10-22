@@ -1,0 +1,16 @@
+services:
+  p4d:
+    build: .
+    image: p4d:latest
+    container_name: p4d
+    init: true
+    ports:
+      - "1666:1666"
+    environment:
+      P4ROOT: /p4/root
+      P4PORT: "1666"
+      P4D_CASE: "1"        # only used when the database is first created
+    volumes:
+      - ./data:/p4
+    restart: unless-stopped
+    stop_grace_period: 60s
